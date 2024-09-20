@@ -10,7 +10,7 @@ function App() {
     axios.defaults.withCredentials = true;
     const setCsrfToken = async () => {
       const { data } = await axios.get<CsrfToken>(
-        `${process.env.REACT_APP_API_URL}/csrf`
+        `${process.env.NOTE_APP_API_URL}/csrf`
       );
       axios.defaults.headers.common["X-CSRF-Token"] = data.csrf_token;
     };

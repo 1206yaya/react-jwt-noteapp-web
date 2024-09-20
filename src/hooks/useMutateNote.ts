@@ -11,7 +11,7 @@ export const useMutateNote = () => {
 
   const createNoteMutation = useMutation(
     (note: Omit<Note, "id" | "created_at" | "updated_at">) =>
-      axios.post<Note>(`${process.env.REACT_APP_API_URL}/notes`, note),
+      axios.post<Note>(`${process.env.NOTE_APP_API_URL}/notes`, note),
     {
       onSuccess: (res) => {
         const previousNotes = queryClient.getQueryData<Note[]>(["notes"]);
@@ -31,7 +31,7 @@ export const useMutateNote = () => {
   );
   const updateNoteMutation = useMutation(
     (note: Omit<Note, "created_at" | "updated_at">) =>
-      axios.put<Note>(`${process.env.REACT_APP_API_URL}/notes/${note.id}`, {
+      axios.put<Note>(`${process.env.NOTE_APP_API_URL}/notes/${note.id}`, {
         title: note.title,
         body: note.body,
       }),
@@ -58,8 +58,7 @@ export const useMutateNote = () => {
     }
   );
   const deleteNoteMutation = useMutation(
-    (id: number) =>
-      axios.delete(`${process.env.REACT_APP_API_URL}/notes/${id}`),
+    (id: number) => axios.delete(`${process.env.NOTE_APP_API_URL}/notes/${id}`),
     {
       onSuccess: (_, variables) => {
         const previousNotes = queryClient.getQueryData<Note[]>(["notes"]);
